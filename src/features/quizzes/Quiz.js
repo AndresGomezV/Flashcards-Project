@@ -4,9 +4,10 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import Card from "../cards/Card";
 import ROUTES from "../../app/routes";
 // import quiz selector
+import { selectQuizzes } from "./quizzesSlice";
 
 export default function Quiz() {
-  const quizzes = {}; // replace this with a call to your selector to get all the quizzes in state
+  const quizzes = useSelector(selectQuizzes);
   const { quizId } = useParams();
   const quiz = quizzes[quizId];
 
@@ -29,3 +30,19 @@ export default function Quiz() {
     </section>
   );
 }
+
+
+/*
+
+Propósito:
+Mostrar los detalles de un quiz específico.
+
+Uso del Selector:
+
+Usas el selector para obtener todos los quizzes del estado global.
+
+Usas useParams de react-router-dom para obtener el quizId de la URL.
+
+Encuentras el quiz específico usando el quizId y renderizas sus detalles.
+
+*/

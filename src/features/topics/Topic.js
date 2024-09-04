@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { Link, useParams, Navigate } from "react-router-dom";
 import ROUTES from "../../app/routes";
 // import selectors
+import { selectQuizzes } from "../quizzes/quizzesSlice";
 
 export default function Topic() {
   const topics = {};  // replace with selector
-  const quizzes = {}; // replace with selector
+  const quizzes = useSelector(selectQuizzes);
   const { topicId } = useParams();
   const topic = topics[topicId];
 
@@ -33,3 +34,20 @@ export default function Topic() {
     </section>
   );
 }
+
+/*
+
+Propósito:
+Mostrar los detalles de un topic específico y los quizzes asociados a ese topic.
+
+Uso del Selector:
+
+Usas el selector para obtener todos los quizzes del estado global.
+
+Usas useParams de react-router-dom para obtener el topicId de la URL.
+
+Encuentras el topic específico usando el topicId.
+
+Usas el array quizIds del topic para encontrar y renderizar los quizzes asociados a ese topic.
+
+*/

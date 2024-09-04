@@ -5,13 +5,15 @@ import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 import { ALL_ICONS } from "../data/icons";
 // import addTopic
+//importamos el action creator: addTopic desde topicsSlice para que el New Topic Form funcione, se debe despachar, por lo tanto useDispatch tambien debe estar importado en este file
+import { addTopic } from "../features/topics/topicsSlice";
 
 export default function NewTopicForm() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("");
   const navigate = useNavigate()
-
+  const topicsId = uuidv4();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.length === 0) {
@@ -19,7 +21,10 @@ export default function NewTopicForm() {
     }
 
     // dispatch new topic
+    dispatch(addTopic({ id: topicsId, icon, name }))
+
     navigate(ROUTES.topicsRoute());
+    
   };
 
   return (
